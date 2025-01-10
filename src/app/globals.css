@@ -14,8 +14,23 @@
   }
 }
 
+* {
+  cursor: none;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+#cursor {
+  background-color: #111;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
 }
