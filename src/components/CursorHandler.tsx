@@ -1,6 +1,5 @@
 "use client";
 
-import Button from "./Button";
 import MacCursor from "./MacCursor";
 import IpadCursor from "./IpadCursor";
 import { useState } from "react";
@@ -13,9 +12,7 @@ export default function CursorHandler() {
   return (
     <div>
       <div>
-        <Button>
-          <span onClick={changeCursorType}>Change cursor</span>
-        </Button>
+        <span onClick={changeCursorType} className="bg-blue-600 rounded-lg p-1 text-sm m-2">Change cursor</span>
       </div>
       {cursorType && <MacCursor size={32} />}
       {!cursorType && <IpadCursor />}
