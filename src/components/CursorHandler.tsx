@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Button from "./Button";
 import MacCursor from "./MacCursor";
@@ -13,7 +13,9 @@ export default function CursorHandler() {
   return (
     <div>
       <div>
-        <Button onClick={changeCursorType}>Change cursor</Button>
+        <Button>
+          <span onClick={changeCursorType}>Change cursor</span>
+        </Button>
       </div>
       {cursorType && <MacCursor size={32} />}
       {!cursorType && <IpadCursor />}

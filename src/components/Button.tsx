@@ -2,11 +2,10 @@
 
 interface ButtonProps {
   children: any,
-  onClick: any;
 }
 
-export default function Button({ children, onClick }: ButtonProps) {
+export default function Button({ children }: ButtonProps) {
   return(
-    <span className="bg-blue-600 rounded-lg p-1 text-sm m-2" onClick={onClick}>{children}</span>
+    <span className="bg-blue-600 rounded-lg p-1 text-sm m-2">{children}</span>
   )
 }
