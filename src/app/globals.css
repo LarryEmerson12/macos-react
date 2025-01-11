@@ -25,7 +25,7 @@ body {
 }
 
 
-#cursor {
+#ipadCursor {
   background-color: #111;
   border-radius: 50%;
   position: fixed;
@@ -33,4 +33,5 @@ body {
   left: 0;
   width: 16px;
   height: 16px;
+  z-index: 9999;
 }
