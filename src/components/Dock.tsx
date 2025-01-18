@@ -1,12 +1,10 @@
-import React from 'react';
+import React from "react";
 
-// Define the type for the `images` object
 type Images = {
-  [key: number]: string; // Keys are numbers, values are strings (image names)
+  [key: number]: string;
 };
 
 export default function Dock() {
-  // Define the `images` object with type annotation
   const images: Images = {
     0: "finder",
     1: "safari",
@@ -18,17 +16,18 @@ export default function Dock() {
 
   return (
     <div className="w-[40ch] h-[7ch] bg-white/45 rounded-2xl flex justify-around items-center backdrop-blur-lg">
-      {Object.keys(images).map((key) => {
-        // Convert the key to a number (Object.keys returns strings)
+      {Object.keys(images).map((key, idx) => {
         const index = Number(key);
         return (
-          <img
-            key={index}
-            src={`/${images[index]}.png`} // Use the image name from the `images` object
-            width={55}
-            height={55}
-            alt={images[index]} // Add alt text for accessibility
-          />
+          <React.Fragment key={index}>
+            <img
+              src={`/${images[index]}.png`}
+              width={55}
+              height={55}
+              alt={images[index]}
+            />
+            {index === 0 && <div className="h-8 w-px bg-gray-600 me-1"></div>}
+          </React.Fragment>
         );
       })}
     </div>
