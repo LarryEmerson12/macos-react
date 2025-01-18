@@ -1,5 +1,6 @@
 import { useOnClickOutside } from "@/utils/useOnClickOutside";
 import { FC, useRef, RefObject } from "react";
+import Menu from "./Menu";
 
 interface ContextMenuProps {
   x: number;
@@ -18,7 +19,7 @@ const ContextMenu: FC<ContextMenuProps> = ({ x, y, closeContextMenu }) => {
       className="absolute z-20"
       style={{ top: `${y}px`, left: `${x}px` }}
     >
-      ContextMenu
+      <Menu />
     </div>
   );
 };
