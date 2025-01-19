@@ -36,8 +36,8 @@ export default function MacCursor({size}: MacCursorProps) {
 
   const variants = {
     default: {
-      x: mousePosition.x - 16,
-      y: mousePosition.y - 20,
+      x: mousePosition.x - 0,
+      y: mousePosition.y - 0,
     },
   };
 
