@@ -1,6 +1,5 @@
 "use client";
 
-import Menu from "./Menu";
 import React from "react";
 
 export default function TopMenu() {
