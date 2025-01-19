@@ -14,11 +14,12 @@ export default function Dock() {
     2: "xcode",
     3: "terminal",
     4: "apple-music",
-    5: "system-preferences",
+    5: "app-store",
+    6: "system-preferences",
   };
 
   return (
-    <div className="w-[40ch] h-[7ch] bg-white/45 rounded-2xl flex justify-around items-center backdrop-blur-lg">
+    <div className="w-[48ch] h-[7ch] bg-white/45 rounded-2xl flex justify-around items-center backdrop-blur-lg">
       {Object.keys(images).map((key) => {
         const index = Number(key);
         return (

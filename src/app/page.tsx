@@ -4,6 +4,7 @@ import React from "react";
 import Dock from "@/components/Dock";
 import { useState } from "react";
 import ContextMenu from "@/components/ContextMenu";
+import TopMenu from "@/components/TopMenu";
 
 const initialContextMenu = {
   show: false,
@@ -35,6 +36,7 @@ export default function Home() {
           closeContextMenu={contextMenuClose}
         />
       )}
+      <TopMenu />
       <Dock />
     </div>
   );
