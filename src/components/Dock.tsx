@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import Image from "next/image";
 
 type Images = {
   [key: number]: string;
@@ -20,7 +23,7 @@ export default function Dock() {
         const index = Number(key);
         return (
           <React.Fragment key={index}>
-            <img
+            <Image
               src={`/${images[index]}.png`}
               width={55}
               height={55}
