@@ -19,7 +19,7 @@ export default function Dock() {
 
   return (
     <div className="w-[40ch] h-[7ch] bg-white/45 rounded-2xl flex justify-around items-center backdrop-blur-lg">
-      {Object.keys(images).map((key, idx) => {
+      {Object.keys(images).map((key) => {
         const index = Number(key);
         return (
           <React.Fragment key={index}>
