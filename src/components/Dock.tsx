@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 
 type Images = {
   [key: number]: string;
@@ -19,17 +20,21 @@ export default function Dock() {
   };
 
   return (
-    <div className="w-[48ch] h-[7ch] bg-white/45 rounded-2xl flex justify-around items-center backdrop-blur-lg">
+    <div className="min-w-[48ch] h-[7ch] bg-white/45 rounded-2xl flex justify-around items-center backdrop-blur-lg">
       {Object.keys(images).map((key) => {
         const index = Number(key);
         return (
           <React.Fragment key={index}>
-            <Image
-              src={`/${images[index]}.png`}
-              width={55}
-              height={55}
-              alt={images[index]}
-            />
+            <motion.div
+              whileHover={{ scale: 1.5 }}
+            >
+              <Image
+                src={`/${images[index]}.png`}
+                width={55}
+                height={55}
+                alt={images[index]}
+              />
+            </motion.div>
             {index === 0 && <div className="h-8 w-px bg-gray-600 me-1"></div>}
           </React.Fragment>
         );
