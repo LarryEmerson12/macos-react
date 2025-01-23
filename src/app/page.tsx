@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div
       onContextMenu={handleContextMenu}
-      className="min-h-screen bg-[url('/big-sur.jpg')] bg-cover bg-center p-4 flex justify-center items-end"
+      className="min-h-screen bg-[url('/wallpapers/big-sur.jpg')] bg-cover bg-center p-4 flex justify-center items-end"
     >
       {contextMenu.show && (
         <ContextMenu
