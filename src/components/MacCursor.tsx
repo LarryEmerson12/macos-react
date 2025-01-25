@@ -53,7 +53,7 @@ export default function MacCursor({size}: MacCursorProps) {
         zIndex: 9999,
       }}
     >
-      <Image src="/cursor.png" width={size} height={40} alt="cursor" />
+      <Image src="cursors/default-cursor.png" width={size} height={40} alt="cursor" />
     </motion.div>
   );
 }
