@@ -5,7 +5,6 @@ import Dock from "@/components/Dock";
 import { useState } from "react";
 import ContextMenu from "@/components/ContextMenu";
 import TopMenu from "@/components/TopMenu";
-import Input from "@/components/Input";
 
 const initialContextMenu = {
   show: false,
@@ -20,7 +19,6 @@ export default function Home() {
   const handleContextMenu = (
     e: React.MouseEvent<HTMLElement, globalThis.MouseEvent>
   ) => {
-    console.log("Context menu triggered", e.pageX, e.pageY); // Debugging
     e.preventDefault();
     const { pageX, pageY } = e;
     setContextMenu({ show: true, x: pageX, y: pageY });

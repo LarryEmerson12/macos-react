@@ -1,5 +1,3 @@
-// Dependencies: npm i framer-motion tailwindcss @radix-ui/react-tooltip
-
 'use client';
 
 import * as Tooltip from '@radix-ui/react-tooltip';
@@ -11,25 +9,32 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion';
-import { ReactNode, useRef } from 'react';
+import { useRef } from 'react';
+import Image from 'next/image';
 
-const SCALE = 2.25; // max scale factor of an icon
-const DISTANCE = 110; // pixels before mouse affects an icon
-const NUDGE = 40; // pixels icons are moved away from mouse
+const SCALE = 2.25;
+const DISTANCE = 110;
+const NUDGE = 40;
 const SPRING = {
   mass: 0.1,
   stiffness: 170,
   damping: 12,
 };
-const APPS = [
-  'Safari',
-  'Mail',
-  'Messages',
-  'Photos',
-  'Notes',
-  'Calendar',
-  'Reminders',
-  'Music',
+
+interface App {
+  name: string;
+  icon: string;
+}
+
+const APPS: App[] = [
+  { name: 'Finder', icon: '/icons/finder.png' },
+  { name: 'Launchpad', icon: '/icons/launchpad.png' },
+  { name: 'Safari', icon: '/icons/safari.png' },
+  { name: 'Notes', icon: '/icons/notes.png' },
+  { name: 'Reminders', icon: '/icons/reminders.png' },
+  { name: 'Messages', icon: '/icons/messages.png' },
+  { name: 'Music', icon: '/icons/apple-music.png' },
+  { name: 'System Preferences', icon: '/icons/system-preferences.png' },
 ];
 
 export default function Dock() {
@@ -61,23 +66,20 @@ export default function Dock() {
           style={{ left: leftSpring, right: rightSpring }}
         />
 
-        {Array.from(Array(APPS.length).keys()).map((i) => (
-          <AppIcon key={i} mouseLeft={mouseLeft}>
-            {APPS[i]}
-          </AppIcon>
+        {APPS.map((app, i) => (
+          <AppIcon key={i} mouseLeft={mouseLeft} app={app} />
         ))}
       </motion.div>
     </>
   );
 }
 
-function AppIcon({
-  mouseLeft,
-  children,
-}: {
+interface AppIconProps {
   mouseLeft: MotionValue;
-  children: ReactNode;
-}) {
+  app: App;
+}
+
+function AppIcon({ mouseLeft, app }: AppIconProps) {
   const ref = useRef<HTMLButtonElement>(null);
 
   const distance = useTransform(() => {
@@ -121,8 +123,15 @@ function AppIcon({
                 duration: 0.7,
               });
             }}
+            className="w-12 h-12 rounded-lg overflow-hidden"
           >
-            Item
+            <Image
+              src={app.icon}
+              alt={app.name}
+              width={48}
+              height={48}
+              className="w-full h-full object-cover"
+            />
           </motion.button>
         </Tooltip.Trigger>
         <Tooltip.Portal>
@@ -130,7 +139,7 @@ function AppIcon({
             sideOffset={10}
             className="z-index-99 bg-gray-700 shadow shadow-black border border-gray-600 px-2 py-1.5 text-sm rounded text-white font-medium"
           >
-            {children}
+            {app.name}
             <Tooltip.Arrow />
           </Tooltip.Content>
         </Tooltip.Portal>
