@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={sanFransisco.className}>
-        <MacCursor size={16} />
+        <MacCursor size={23} />
         {children}
       </body>
     </html>

@@ -5,6 +5,7 @@ import Dock from "@/components/Dock";
 import { useState } from "react";
 import ContextMenu from "@/components/ContextMenu";
 import TopMenu from "@/components/TopMenu";
+import Input from "@/components/Input";
 
 const initialContextMenu = {
   show: false,
