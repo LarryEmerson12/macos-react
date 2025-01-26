@@ -46,31 +46,31 @@ export default function Dock() {
   const rightSpring = useSpring(right, SPRING);
 
   return (
-    <>
+    <motion.div
+      onMouseMove={(e) => {
+        const { left, right } = e.currentTarget.getBoundingClientRect();
+        const offsetLeft = e.clientX - left;
+        const offsetRight = right - e.clientX;
+        mouseLeft.set(offsetLeft);
+        mouseRight.set(offsetRight);
+      }}
+      onMouseLeave={() => {
+        mouseLeft.set(-Infinity);
+        mouseRight.set(-Infinity);
+      }}
+      className="mx-auto hidden h-16 items-end gap-3 px-2 pb-3 sm:flex relative"
+    >
+      {/* Dock Background */}
       <motion.div
-        onMouseMove={(e) => {
-          const { left, right } = e.currentTarget.getBoundingClientRect();
-          const offsetLeft = e.clientX - left;
-          const offsetRight = right - e.clientX;
-          mouseLeft.set(offsetLeft);
-          mouseRight.set(offsetRight);
-        }}
-        onMouseLeave={() => {
-          mouseLeft.set(-Infinity);
-          mouseRight.set(-Infinity);
-        }}
-        className="mx-auto hidden h-16 items-end gap-3 px-2 pb-3 sm:flex relative"
-      >
-        <motion.div
-          className="absolute rounded-2xl inset-y-0 bg-gray-700 border border-gray-600 -z-10"
-          style={{ left: leftSpring, right: rightSpring }}
-        />
+        className="absolute rounded-2xl inset-y-0 bg-white/45 backdrop-blur-lg z-0"
+        style={{ left: leftSpring, right: rightSpring }}
+      />
 
-        {APPS.map((app, i) => (
-          <AppIcon key={i} mouseLeft={mouseLeft} app={app} />
-        ))}
-      </motion.div>
-    </>
+      {/* App Icons */}
+      {APPS.map((app, i) => (
+        <AppIcon key={i} mouseLeft={mouseLeft} app={app} />
+      ))}
+    </motion.div>
   );
 }
 
@@ -123,7 +123,7 @@ function AppIcon({ mouseLeft, app }: AppIconProps) {
                 duration: 0.7,
               });
             }}
-            className="w-12 h-12 rounded-lg overflow-hidden"
+            className="w-12 h-12 rounded-lg overflow-hidden z-10"
           >
             <Image
               src={app.icon}
@@ -138,7 +138,7 @@ function AppIcon({ mouseLeft, app }: AppIconProps) {
         <Tooltip.Portal>
           <Tooltip.Content
             sideOffset={10}
-            className="z-index-99 bg-gray-700 shadow shadow-black border border-gray-600 px-2 py-1.5 text-sm rounded text-white font-medium"
+            className="z-50 bg-gray-700 shadow shadow-black border border-gray-600 px-2 py-1.5 text-sm rounded text-white font-medium"
           >
             {app.name}
             <Tooltip.Arrow />
