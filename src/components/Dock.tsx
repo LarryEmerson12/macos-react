@@ -131,6 +131,7 @@ function AppIcon({ mouseLeft, app }: AppIconProps) {
               width={48}
               height={48}
               className="w-full h-full object-cover"
+              quality={100}
             />
           </motion.button>
         </Tooltip.Trigger>

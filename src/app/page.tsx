@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import ContextMenu from "@/components/ContextMenu";
 import TopMenu from "@/components/TopMenu";
 import MacCursor from "@/components/MacCursor";
+import Input from "@/components/Input";
 
 const initialContextMenu = {
   show: false,
