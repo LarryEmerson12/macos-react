@@ -2,9 +2,10 @@
 
 import React from "react";
 import Dock from "@/components/Dock";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContextMenu from "@/components/ContextMenu";
 import TopMenu from "@/components/TopMenu";
+import MacCursor from "@/components/MacCursor";
 
 const initialContextMenu = {
   show: false,
@@ -13,6 +14,15 @@ const initialContextMenu = {
 };
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, []);
   const [contextMenu, setContextMenu] = useState(initialContextMenu);
   const contextMenuClose = () => setContextMenu(initialContextMenu);
 
@@ -28,6 +38,7 @@ export default function Home() {
       onContextMenu={handleContextMenu}
       className="min-h-screen bg-[url('/wallpapers/big-sur.jpg')] bg-cover bg-center p-4 flex justify-center items-end"
     >
+      <MacCursor size={23} isLoading={isLoading} />
       {contextMenu.show && (
         <ContextMenu
           x={contextMenu.x}

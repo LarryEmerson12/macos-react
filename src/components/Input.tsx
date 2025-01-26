@@ -5,7 +5,7 @@ import React from "react"
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string,
   error?: string,
-  className?: string
+  className?: string,
 }
 
 export default function Input({

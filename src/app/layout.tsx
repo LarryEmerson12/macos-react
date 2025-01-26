@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import MacCursor from "@/components/MacCursor";
 import localFont from "next/font/local"
 
 export const metadata: Metadata = {
@@ -18,7 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={sanFransisco.className}>
-        <MacCursor size={23} />
         {children}
       </body>
     </html>

@@ -11,6 +11,7 @@ interface ContextMenuProps {
 const ContextMenu: FC<ContextMenuProps> = ({ x, y, closeContextMenu }) => {
   const contextMenuRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(contextMenuRef as RefObject<HTMLElement>, closeContextMenu);
+  const contextMenuContent = ["New Folder", "Get Info", "Change Desktop Background", "Use Stacks", "Sort By", "Clean Up", "Clean Up By", "Show View Options"]
 
   return (
     <div
@@ -19,7 +20,7 @@ const ContextMenu: FC<ContextMenuProps> = ({ x, y, closeContextMenu }) => {
       className="absolute z-20"
       style={{ top: `${y}px`, left: `${x}px` }}
     >
-      <Menu />
+      <Menu content={contextMenuContent} />
     </div>
   );
 };

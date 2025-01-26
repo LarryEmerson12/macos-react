@@ -11,11 +11,12 @@ interface MacMousePosition {
 
 interface MacCursorProps {
   size: number;
+  isLoading?: boolean;
 }
 
-type CursorType = "default" | "pointer" | "text";
+type CursorType = "default" | "pointer" | "text" | "wait";
 
-export default function MacCursor({ size }: MacCursorProps) {
+export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
   const [mousePosition, setMousePosition] = useState<MacMousePosition>({
     x: 0,
     y: 0,
@@ -23,7 +24,6 @@ export default function MacCursor({ size }: MacCursorProps) {
   const [cursorType, setCursorType] = useState<CursorType>("default");
   const [isSelectingText, setIsSelectingText] = useState(false);
 
-  // Track mouse movement
   useEffect(() => {
     const mouseMove = (e: MouseEvent) => {
       setMousePosition({
@@ -39,14 +39,13 @@ export default function MacCursor({ size }: MacCursorProps) {
     };
   }, []);
 
-  // Track text selection
   useEffect(() => {
     const handleSelectionChange = () => {
       const selection = window.getSelection();
       if (selection && selection.toString().length > 0) {
-        setIsSelectingText(true); // Text is being selected
+        setIsSelectingText(true);
       } else {
-        setIsSelectingText(false); // Text selection is cleared
+        setIsSelectingText(false);
       }
     };
 
@@ -57,13 +56,14 @@ export default function MacCursor({ size }: MacCursorProps) {
     };
   }, []);
 
-  // Track hover states for links, buttons, inputs, etc.
   useEffect(() => {
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
-      if (isSelectingText) {
-        setCursorType("text"); // Force text cursor during text selection
+      if (isLoading) {
+        setCursorType("wait");
+      } else if (isSelectingText) {
+        setCursorType("text");
       } else if (
         target.tagName === "INPUT" ||
         target.tagName === "TEXTAREA" ||
@@ -82,8 +82,7 @@ export default function MacCursor({ size }: MacCursorProps) {
     return () => {
       document.removeEventListener("mouseover", handleMouseOver);
     };
-  }, [isSelectingText]); // Re-run effect when isSelectingText changes
-
+  }, [isSelectingText, isLoading]);
   const variants = {
     default: {
       x: mousePosition.x - 0,
@@ -95,11 +94,12 @@ export default function MacCursor({ size }: MacCursorProps) {
     default: "/cursors/default-cursor.png",
     pointer: "/cursors/pointer-cursor.png",
     text: "/cursors/text-cursor.png",
+    wait: "/cursors/wait-cursor.png",
   };
 
   return (
     <motion.div
-    className="pointer-coarse:hidden"
+      className="pointer-coarse:hidden"
       variants={variants}
       animate="default"
       style={{
@@ -115,6 +115,7 @@ export default function MacCursor({ size }: MacCursorProps) {
         width={size}
         height={40}
         alt="cursor"
+        className={cursorType === "wait" ? "animate-spin" : ""}
       />
     </motion.div>
   );
