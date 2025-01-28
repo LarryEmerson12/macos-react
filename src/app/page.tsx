@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Dock from "@/components/Dock";
 import ContextMenu from "@/components/ContextMenu";
 import TopBar from "@/components/TopBar";
