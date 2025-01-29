@@ -54,6 +54,24 @@ const topMenuMenu = [
     "Show Preview Options",
     "Enter Full Screen",
   ],
+  [
+    "Back",
+    "Forward",
+    "Enclosing Folder",
+    "Recents",
+    "Documents",
+    "Desktop",
+    "Downloads",
+    "Home",
+    "Computer",
+    "Airdrop",
+    "Network",
+    "iCloud Drive",
+    "Applications",
+    "Utilities",
+    "Go to Folder",
+    "Connect to Server",
+  ],
 ];
 
 export default topMenuMenu;

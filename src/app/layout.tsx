@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local"
+import MacCursor from "@/components/MacCursor";
 
 export const metadata: Metadata = {
   title: "macOS in React",
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={sanFransisco.className}>
+        <MacCursor size={23} />
         {children}
       </body>
     </html>

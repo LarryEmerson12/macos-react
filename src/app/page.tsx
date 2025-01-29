@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import Dock from "@/components/Dock";
 import ContextMenu from "@/components/ContextMenu";
 import TopBar from "@/components/TopBar";
-import MacCursor from "@/components/MacCursor";
 
 const initialContextMenu = {
   show: false,
@@ -28,7 +27,6 @@ export default function Home() {
       onContextMenu={handleContextMenu}
       className="min-h-screen bg-[url('/wallpapers/big-sur.jpg')] bg-cover bg-center p-4 flex justify-center items-end"
     >
-      <MacCursor size={23} />
       {contextMenu.show && (
         <ContextMenu
           x={contextMenu.x}

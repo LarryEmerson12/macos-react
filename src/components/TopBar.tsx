@@ -1,8 +1,10 @@
 "use client";
 
+import { RefObject, useRef } from "react";
 import topMenuMenu from "@/config/TopMenuConfig";
 import Menu from "./Menu";
 import { useState } from "react";
+import { useOnClickOutside } from "@/utils/useOnClickOutside";
 
 const initialTopBarMenu = {
   show: false,
@@ -14,13 +16,17 @@ export default function TopBar() {
   const [topBarMenu, setTopBarMenu] = useState(initialTopBarMenu);
   const [selectedMenuIndex, setSelectedMenuIndex] = useState<number | null>(null);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const topBarMenuClose = () => setTopBarMenu(initialTopBarMenu);
 
   const handleTopBarMenu = (e: React.MouseEvent<HTMLElement>, index: number) => {
     const { pageX, pageY } = e;
     setSelectedMenuIndex(index);
-    setTopBarMenu({ show: true, x: pageX, y: pageY });
+    setTopBarMenu({ show: true, x: pageX - 25, y: pageY + 25 });
   };
+
+  useOnClickOutside(menuRef as RefObject<HTMLElement>, topBarMenuClose);
 
   const topMenuItems = ["File", "Edit", "View", "Go", "Window", "Help"];
 
@@ -40,6 +46,7 @@ export default function TopBar() {
       </div>
       {topBarMenu.show && selectedMenuIndex !== null && (
         <div
+          ref={menuRef}
           onClick={topBarMenuClose}
           className="absolute z-20"
           style={{ top: `${topBarMenu.y}px`, left: `${topBarMenu.x}px` }}

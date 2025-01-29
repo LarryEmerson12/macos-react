@@ -24,6 +24,7 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
   const [cursorType, setCursorType] = useState<CursorType>("default");
   const [isSelectingText, setIsSelectingText] = useState(false);
 
+  // Track mouse movement
   useEffect(() => {
     const mouseMove = (e: MouseEvent) => {
       setMousePosition({
@@ -83,12 +84,6 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
       document.removeEventListener("mouseover", handleMouseOver);
     };
   }, [isSelectingText, isLoading]);
-  const variants = {
-    default: {
-      x: mousePosition.x - 0,
-      y: mousePosition.y - 0,
-    },
-  };
 
   const cursorImage = {
     default: "/cursors/default-cursor.png",
@@ -100,12 +95,10 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
   return (
     <motion.div
       className="pointer-coarse:hidden"
-      variants={variants}
-      animate="default"
       style={{
         position: "fixed",
-        top: 0,
-        left: 0,
+        top: mousePosition.y - size / 2,
+        left: mousePosition.x - size / 2,
         pointerEvents: "none",
         zIndex: 9999,
       }}
@@ -113,7 +106,7 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
       <Image
         src={cursorImage[cursorType]}
         width={size}
-        height={40}
+        height={size}
         alt="cursor"
         className={cursorType === "wait" ? "animate-spin" : ""}
       />
