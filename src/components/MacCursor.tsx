@@ -24,7 +24,6 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
   const [cursorType, setCursorType] = useState<CursorType>("default");
   const [isSelectingText, setIsSelectingText] = useState(false);
 
-  // Track mouse movement
   useEffect(() => {
     const mouseMove = (e: MouseEvent) => {
       setMousePosition({
@@ -61,6 +60,8 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
+      const isDisabled = target.hasAttribute("disabled");
+
       if (isLoading) {
         setCursorType("wait");
       } else if (isSelectingText) {
@@ -71,7 +72,7 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
         target.isContentEditable
       ) {
         setCursorType("text");
-      } else if (target.tagName === "A" || target.tagName === "BUTTON") {
+      } else if ((target.tagName === "A" || target.tagName === "BUTTON") && !isDisabled) {
         setCursorType("pointer");
       } else {
         setCursorType("default");
