@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Dock from "@/components/Dock";
 import ContextMenu from "@/components/ContextMenu";
 import TopBar from "@/components/TopBar";
+import Button from "@/components/Button";
 
 const initialContextMenu = {
   show: false,
@@ -22,6 +23,15 @@ export default function Home() {
     setContextMenu({ show: true, x: pageX, y: pageY });
   };
 
+  const requestFullscreen = () => {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if ((document.documentElement as any).webkitRequestFullscreen) {
+      (document.documentElement as any).webkitRequestFullscreen();
+    }
+  };
+
+
   return (
     <div
       onContextMenu={handleContextMenu}
@@ -36,6 +46,9 @@ export default function Home() {
       )}
       <TopBar />
       <Dock />
+      <Button onClick={requestFullscreen}>
+        Go Fullscreen
+      </Button>
     </div>
   );
 }
