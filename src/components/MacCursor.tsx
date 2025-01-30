@@ -57,10 +57,10 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
   }, []);
 
   useEffect(() => {
-    const handleMouseOver = (e: MouseEvent) => {
+    const handleMouseEnter = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
-      const isDisabled = target.hasAttribute("disabled");
+      const isDisabled = target.closest("[disabled]") !== null;
 
       if (isLoading) {
         setCursorType("wait");
@@ -72,17 +72,20 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
         target.isContentEditable
       ) {
         setCursorType("text");
-      } else if ((target.tagName === "A" || target.tagName === "BUTTON") && !isDisabled) {
+      } else if (
+        (target.tagName === "A" || target.tagName === "BUTTON") &&
+        !isDisabled
+      ) {
         setCursorType("pointer");
       } else {
         setCursorType("default");
       }
     };
 
-    document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseenter", handleMouseEnter, true); // Use capture phase
 
     return () => {
-      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseenter", handleMouseEnter, true);
     };
   }, [isSelectingText, isLoading]);
 
