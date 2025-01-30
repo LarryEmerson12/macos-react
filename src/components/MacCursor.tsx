@@ -30,6 +30,32 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
         x: e.clientX,
         y: e.clientY,
       });
+
+      // Get the element under the cursor
+      const target = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement;
+
+      if (target) {
+        const isDisabled = target.closest("[disabled]") !== null;
+
+        if (isLoading) {
+          setCursorType("wait");
+        } else if (isSelectingText) {
+          setCursorType("text");
+        } else if (
+          target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable
+        ) {
+          setCursorType("text");
+        } else if (
+          (target.tagName === "A" || target.tagName === "BUTTON") &&
+          !isDisabled
+        ) {
+          setCursorType("pointer");
+        } else {
+          setCursorType("default");
+        }
+      }
     };
 
     window.addEventListener("mousemove", mouseMove);
@@ -37,7 +63,7 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
     return () => {
       window.removeEventListener("mousemove", mouseMove);
     };
-  }, []);
+  }, [isSelectingText, isLoading]);
 
   useEffect(() => {
     const handleSelectionChange = () => {
@@ -55,39 +81,6 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
       document.removeEventListener("selectionchange", handleSelectionChange);
     };
   }, []);
-
-  useEffect(() => {
-    const handleMouseEnter = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-
-      const isDisabled = target.closest("[disabled]") !== null;
-
-      if (isLoading) {
-        setCursorType("wait");
-      } else if (isSelectingText) {
-        setCursorType("text");
-      } else if (
-        target.tagName === "INPUT" ||
-        target.tagName === "TEXTAREA" ||
-        target.isContentEditable
-      ) {
-        setCursorType("text");
-      } else if (
-        (target.tagName === "A" || target.tagName === "BUTTON") &&
-        !isDisabled
-      ) {
-        setCursorType("pointer");
-      } else {
-        setCursorType("default");
-      }
-    };
-
-    document.addEventListener("mouseenter", handleMouseEnter, true); // Use capture phase
-
-    return () => {
-      document.removeEventListener("mouseenter", handleMouseEnter, true);
-    };
-  }, [isSelectingText, isLoading]);
 
   const cursorImage = {
     default: "/cursors/default-cursor.png",
