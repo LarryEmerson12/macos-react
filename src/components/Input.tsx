@@ -7,11 +7,9 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string,
   error?: string,
   className?: string,
-  value?: string,
 }
 
 export default function Input({
-  value = "",
   type = "text",
   placeholder = "",
   error,
@@ -25,7 +23,6 @@ export default function Input({
         type={type}
         className={`${baseStyles} ${className}`}
         placeholder={placeholder}
-        value={value}
         {...props}
       />
       {error && <p className="text-sm text-red-500">{error}</p>}
