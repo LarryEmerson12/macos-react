@@ -1,84 +1,42 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
-interface MacMousePosition {
-  x: number;
-  y: number;
-}
-
-interface MacCursorProps {
-  size: number;
-  isLoading?: boolean;
-}
-
-type CursorType = "default" | "pointer" | "text" | "wait";
-
-export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
-  const [mousePosition, setMousePosition] = useState<MacMousePosition>({
-    x: 0,
-    y: 0,
-  });
-  const [cursorType, setCursorType] = useState<CursorType>("default");
+const MacCursor = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isSelectingText, setIsSelectingText] = useState(false);
+  const size = 24;
 
   useEffect(() => {
-    const mouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      });
-
-      // Get the element under the cursor
-      const target = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement;
-
-      if (target) {
-        const isDisabled = target.closest("[disabled]") !== null;
-
-        if (isLoading) {
-          setCursorType("wait");
-        } else if (isSelectingText) {
-          setCursorType("text");
-        } else if (
-          target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.isContentEditable
-        ) {
-          setCursorType("text");
-        } else if (
-          (target.tagName === "A" || target.tagName === "BUTTON") &&
-          !isDisabled
-        ) {
-          setCursorType("pointer");
-        } else {
-          setCursorType("default");
-        }
-      }
+    const handleMouseMove = (event: MouseEvent) => {
+      setMousePosition({ x: event.clientX, y: event.clientY });
     };
 
-    window.addEventListener("mousemove", mouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", mouseMove);
-    };
-  }, [isSelectingText, isLoading]);
-
-  useEffect(() => {
     const handleSelectionChange = () => {
-      const selection = window.getSelection();
-      if (selection && selection.toString().length > 0) {
+      if (document.getSelection()?.toString()) {
         setIsSelectingText(true);
       } else {
         setIsSelectingText(false);
       }
     };
 
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        document.addEventListener("mousemove", handleMouseMove);
+      } else {
+        document.removeEventListener("mousemove", handleMouseMove);
+      }
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("selectionchange", handleSelectionChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("selectionchange", handleSelectionChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
@@ -100,13 +58,14 @@ export default function MacCursor({ size, isLoading = false }: MacCursorProps) {
         zIndex: 9999,
       }}
     >
-      <Image
-        src={cursorImage[cursorType]}
+      <img
+        src={isSelectingText ? cursorImage.text : cursorImage.default}
+        alt="Custom Cursor"
         width={size}
         height={size}
-        alt="cursor"
-        className={cursorType === "wait" ? "animate-spin" : ""}
       />
     </motion.div>
   );
-}
+};
+
+export default MacCursor;
