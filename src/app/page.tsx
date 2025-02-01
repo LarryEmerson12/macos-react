@@ -1,10 +1,8 @@
 "use client";
-
 import React, { useState } from "react";
 import Dock from "@/components/Dock";
 import ContextMenu from "@/components/ContextMenu";
 import TopBar from "@/components/TopBar";
-import Button from "@/components/Button";
 
 const initialContextMenu = {
   show: false,
@@ -24,13 +22,16 @@ export default function Home() {
   };
 
   const requestFullscreen = () => {
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen();
-    } else if ((document.documentElement as any).webkitRequestFullscreen) {
-      (document.documentElement as any).webkitRequestFullscreen();
+    const docElement = document.documentElement as HTMLElement & {
+      webkitRequestFullscreen?: () => Promise<void>;
+    };
+
+    if (docElement.requestFullscreen) {
+      docElement.requestFullscreen();
+    } else if (docElement.webkitRequestFullscreen) {
+      docElement.webkitRequestFullscreen();
     }
   };
-
 
   return (
     <div
@@ -46,9 +47,9 @@ export default function Home() {
       )}
       <TopBar />
       <Dock />
-      <Button onClick={requestFullscreen}>
+      <button onClick={requestFullscreen} className="fullscreen-button">
         Go Fullscreen
-      </Button>
+      </button>
     </div>
   );
 }
