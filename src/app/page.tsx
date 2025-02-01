@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Dock from "@/components/Dock";
 import ContextMenu from "@/components/ContextMenu";
 import TopBar from "@/components/TopBar";
+import Button from "@/components/Button";
 
 const initialContextMenu = {
   show: false,
@@ -47,9 +48,9 @@ export default function Home() {
       )}
       <TopBar />
       <Dock />
-      <button onClick={requestFullscreen} className="fullscreen-button">
+      <Button onClick={requestFullscreen}>
         Go Fullscreen
-      </button>
+      </Button>
     </div>
   );
 }
