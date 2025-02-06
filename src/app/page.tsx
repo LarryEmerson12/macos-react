@@ -48,7 +48,7 @@ export default function Home() {
       )}
       <TopBar />
       <Dock />
-      <Button onClick={requestFullscreen}>
+      <Button onClick={requestFullscreen} className="absolute bottom-4 right-4">
         Go Fullscreen
       </Button>
     </div>

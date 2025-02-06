@@ -27,14 +27,14 @@ interface App {
 }
 
 const APPS: App[] = [
-  { name: 'Finder', icon: '/icons/finder.png' },
-  { name: 'Launchpad', icon: '/icons/launchpad.png' },
-  { name: 'Safari', icon: '/icons/safari.png' },
-  { name: 'Notes', icon: '/icons/notes.png' },
-  { name: 'Reminders', icon: '/icons/reminders.png' },
-  { name: 'Messages', icon: '/icons/messages.png' },
-  { name: 'Music', icon: '/icons/apple-music.png' },
-  { name: 'System Preferences', icon: '/icons/system-preferences.png' },
+  { name: 'Finder', icon: '/icons/finder.svg' },
+  { name: 'Launchpad', icon: '/icons/launchpad.svg' },
+  { name: 'Safari', icon: '/icons/safari.svg' },
+  { name: 'Notes', icon: '/icons/notes.svg' },
+  { name: 'Reminders', icon: '/icons/reminders.svg' },
+  { name: 'Messages', icon: '/icons/messages.svg' },
+  { name: 'Music', icon: '/icons/apple-music.svg' },
+  { name: 'System Preferences', icon: '/icons/system-preferences.svg' },
 ];
 
 export default function Dock() {
