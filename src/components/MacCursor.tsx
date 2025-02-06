@@ -1,12 +1,16 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
-const MacCursor = () => {
+interface MacCursorProps {
+  size: number;
+}
+
+const MacCursor: React.FC<MacCursorProps> = ({ size }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isSelectingText, setIsSelectingText] = useState(false);
-  const size = 24;
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -42,9 +46,7 @@ const MacCursor = () => {
 
   const cursorImage = {
     default: "/cursors/default-cursor.png",
-    pointer: "/cursors/pointer-cursor.png",
     text: "/cursors/text-cursor.png",
-    wait: "/cursors/wait-cursor.png",
   };
 
   return (
@@ -58,7 +60,7 @@ const MacCursor = () => {
         zIndex: 9999,
       }}
     >
-      <img
+      <Image
         src={isSelectingText ? cursorImage.text : cursorImage.default}
         alt="Custom Cursor"
         width={size}
