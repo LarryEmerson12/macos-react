@@ -35,6 +35,7 @@ const APPS: App[] = [
   { name: 'Messages', icon: '/icons/messages.svg' },
   { name: 'Music', icon: '/icons/apple-music.svg' },
   { name: 'System Preferences', icon: '/icons/system-preferences.svg' },
+  { name: 'Bin', icon: '/icons/bin.svg' },
 ];
 
 export default function Dock() {
