@@ -29,17 +29,17 @@ export default function Home() {
     setContextMenu({ show: true, x: pageX, y: pageY });
   };
 
-  const requestFullscreen = () => {
-    const docElement = document.documentElement as HTMLElement & {
-      webkitRequestFullscreen?: () => Promise<void>;
-    };
+  // const requestFullscreen = () => {
+  //   const docElement = document.documentElement as HTMLElement & {
+  //     webkitRequestFullscreen?: () => Promise<void>;
+  //   };
 
-    if (docElement.requestFullscreen) {
-      docElement.requestFullscreen();
-    } else if (docElement.webkitRequestFullscreen) {
-      docElement.webkitRequestFullscreen();
-    }
-  };
+  //   if (docElement.requestFullscreen) {
+  //     docElement.requestFullscreen();
+  //   } else if (docElement.webkitRequestFullscreen) {
+  //     docElement.webkitRequestFullscreen();
+  //   }
+  // };
 
   return (
     <div
