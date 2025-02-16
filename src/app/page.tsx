@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import Dock from "@/components/Dock";
 import ContextMenu from "@/components/ContextMenu";
@@ -37,7 +38,7 @@ export default function Home() {
   return (
     <div
       onContextMenu={handleContextMenu}
-      className="min-h-screen bg-[url('/wallpapers/big-sur.jpg')] bg-cover bg-center p-4 flex justify-center items-end"
+      className="min-h-screen bg-[url('/wallpapers/Macintosh.png')] bg-cover bg-center p-4 flex justify-center items-end"
     >
       {contextMenu.show && (
         <ContextMenu
