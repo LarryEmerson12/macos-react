@@ -12,7 +12,7 @@ interface WindowProps {
 
 export default function Window({ title, children }: WindowProps) {
   const nodeRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement);
-  const [position, setPosition] = useState({ x: 0, y: -200 });
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleDrag = (e: DraggableEvent, data: DraggableData) => {
     setPosition({ x: data.x, y: data.y });
@@ -22,7 +22,7 @@ export default function Window({ title, children }: WindowProps) {
     <Draggable nodeRef={nodeRef} position={position} onDrag={handleDrag}>
       <ResizableBox
         width={800}
-        height={300}
+        height={500}
         minConstraints={[300, 200]}
         maxConstraints={[1200, 800]}
         className="macos-window bg-white rounded-lg shadow-lg overflow-hidden"

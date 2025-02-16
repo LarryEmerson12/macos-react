@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import clsx from "clsx";
 import Dock from "@/components/Dock";
 import ContextMenu from "@/components/ContextMenu";
 import TopBar from "@/components/TopBar";
@@ -8,6 +9,7 @@ import Button from "@/components/Button";
 import Window from "@/components/Window";
 import Image from "next/image";
 import Input from "@/components/Input";
+import wallpapers from "@/config/WallpaperConfig";
 
 const initialContextMenu = {
   show: false,
@@ -17,6 +19,7 @@ const initialContextMenu = {
 
 export default function Home() {
   const [contextMenu, setContextMenu] = useState(initialContextMenu);
+  const [wallpaper, setWallpaper] = useState("/wallpapers/SequoiaDark.png");
 
   const contextMenuClose = () => setContextMenu(initialContextMenu);
 
@@ -41,7 +44,8 @@ export default function Home() {
   return (
     <div
       onContextMenu={handleContextMenu}
-      className="min-h-screen bg-[url('/wallpapers/Macintosh.png')] bg-cover bg-center p-4 flex justify-center items-end"
+      style={{ backgroundImage: `url(${wallpaper})` }}
+      className="min-h-screen bg-cover bg-center p-4 flex justify-center items-end"
     >
       {contextMenu.show && (
         <ContextMenu
@@ -50,7 +54,7 @@ export default function Home() {
           closeContextMenu={contextMenuClose}
         />
       )}
-      <TopBar />{" "}
+      <TopBar />
       <div className="absolute">
         <Window title="System Preferences">
           <aside className="hidden w-[250px] flex-col md:flex p-4">
@@ -66,12 +70,26 @@ export default function Home() {
               <span className="pt-[2.5px]">Wallpaper</span>
             </Button>
           </aside>
-          <div className="grid grid-cols-3">
-            {}
+          <div className="overflow-y-auto h-[400px] p-4">
+            <div className="grid grid-cols-3 gap-4">
+              {wallpapers.map((wallpaperItem) => (
+                <div
+                  key={wallpaperItem.name}
+                  className="relative w-full h-48 cursor-pointer"
+                  onClick={() => setWallpaper(wallpaperItem.url)}
+                >
+                  <Image
+                    src={wallpaperItem.url}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    alt={wallpaperItem.name}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </Window>
       </div>
-      {/* <Button onClick={requestFullscreen}>Go Fullscreen</Button> */}
       <Dock />
     </div>
   );
