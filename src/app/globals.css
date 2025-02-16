@@ -22,3 +22,15 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+.macos-window {
+  transition: transform 0.1s ease-out, width 0.1s ease-out, height 0.1s ease-out;
+}
+
+.macos-window-header-button {
+  transition: background-color 0.2s ease;
+}
+
+.macos-window-header-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}

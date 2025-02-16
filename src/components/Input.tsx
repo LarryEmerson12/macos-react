@@ -16,7 +16,7 @@ export default function Input({
   className = "",
   ...props
 }: InputProps) {
-  const baseStyles = "h-8 rounded-md bg-white/10 backdrop-blur-lg focus:outline-none px-2 font-extralight text-gray-500"
+  const baseStyles = "h-8 rounded-md bg-black/10 backdrop-blur-lg focus:outline-none px-2 font-extralight text-gray-500"
   return (
     <div className="relative">
       <input

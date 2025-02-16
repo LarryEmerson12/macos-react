@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import * as Tooltip from '@radix-ui/react-tooltip';
+import * as Tooltip from "@radix-ui/react-tooltip";
 import {
   MotionValue,
   animate,
@@ -8,9 +8,9 @@ import {
   useMotionValue,
   useSpring,
   useTransform,
-} from 'framer-motion';
-import { useRef } from 'react';
-import Image from 'next/image';
+} from "framer-motion";
+import { useRef } from "react";
+import Image from "next/image";
 
 const SCALE = 2.25;
 const DISTANCE = 110;
@@ -27,24 +27,24 @@ interface App {
 }
 
 const APPS: App[] = [
-  { name: 'Finder', icon: '/icons/finder.svg' },
-  { name: 'Launchpad', icon: '/icons/launchpad.svg' },
-  { name: 'Safari', icon: '/icons/safari.svg' },
-  { name: 'Facetime', icon: '/icons/facetime.svg' },
-  { name: 'Messages', icon: '/icons/messages.svg' },
-  { name: 'Notes', icon: '/icons/notes.svg' },
-  { name: 'Reminders', icon: '/icons/reminders.svg' },
-  { name: 'Photos', icon: '/icons/photos.svg' },
-  { name: 'Maps', icon: '/icons/maps.svg' },
-  { name: 'Mail', icon: '/icons/mail.svg' },
-  { name: 'Podcast', icon: '/icons/podcast.svg' },
-  { name: 'Keynote', icon: '/icons/keynote.svg' },
-  { name: 'Terminal', icon: '/icons/terminal.svg' },
-  { name: 'Apple Music', icon: '/icons/apple-music.svg' },
-  { name: 'App Store', icon: '/icons/app-store.svg' },
-  { name: 'Github', icon: '/icons/github.svg' },
-  { name: 'System Preferences', icon: '/icons/system-preferences.svg' },
-  { name: 'Bin', icon: '/icons/bin.svg' },
+  { name: "Finder", icon: "/app-icons/finder.svg" },
+  { name: "Launchpad", icon: "/app-icons/launchpad.svg" },
+  { name: "Safari", icon: "/app-icons/safari.svg" },
+  { name: "Facetime", icon: "/app-icons/facetime.svg" },
+  { name: "Messages", icon: "/app-icons/messages.svg" },
+  { name: "Notes", icon: "/app-icons/notes.svg" },
+  { name: "Reminders", icon: "/app-icons/reminders.svg" },
+  { name: "Photos", icon: "/app-icons/photos.svg" },
+  { name: "Maps", icon: "/app-icons/maps.svg" },
+  { name: "Mail", icon: "/app-icons/mail.svg" },
+  { name: "Podcast", icon: "/app-icons/podcast.svg" },
+  { name: "Keynote", icon: "/app-icons/keynote.svg" },
+  { name: "Terminal", icon: "/app-icons/terminal.svg" },
+  { name: "Apple Music", icon: "/app-icons/apple-music.svg" },
+  { name: "App Store", icon: "/app-icons/app-store.svg" },
+  { name: "Github", icon: "/app-icons/github.svg" },
+  { name: "System Preferences", icon: "/app-icons/system-preferences.svg" },
+  { name: "Bin", icon: "/app-icons/bin.svg" },
 ];
 
 export default function Dock() {

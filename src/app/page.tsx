@@ -5,6 +5,9 @@ import Dock from "@/components/Dock";
 import ContextMenu from "@/components/ContextMenu";
 import TopBar from "@/components/TopBar";
 import Button from "@/components/Button";
+import Window from "@/components/Window";
+import Image from "next/image";
+import Input from "@/components/Input";
 
 const initialContextMenu = {
   show: false,
@@ -47,11 +50,29 @@ export default function Home() {
           closeContextMenu={contextMenuClose}
         />
       )}
-      <TopBar />
+      <TopBar />{" "}
+      <div className="absolute">
+        <Window title="System Preferences">
+          <aside className="hidden w-[250px] flex-col md:flex p-4">
+            <Input placeholder="Search..." />
+            <Button className="w-[19.5ch] h-[3ch] my-2 inline-block">
+              <Image
+                src="/icons/wallpaper-icon.svg"
+                width={23}
+                height={16}
+                alt=""
+                className="me-1"
+              />
+              <span className="pt-[2.5px]">Wallpaper</span>
+            </Button>
+          </aside>
+          <div className="grid grid-cols-3">
+            {}
+          </div>
+        </Window>
+      </div>
+      {/* <Button onClick={requestFullscreen}>Go Fullscreen</Button> */}
       <Dock />
-      <Button onClick={requestFullscreen} className="absolute top-10 right-4">
-        Go Fullscreen
-      </Button>
     </div>
   );
 }
