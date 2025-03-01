@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-// import clsx from "clsx";
+import { AlertDialog } from "@/components/AlertDialog";
 import Dock from "@/components/Dock";
 import ContextMenu from "@/components/ContextMenu";
 import TopBar from "@/components/TopBar";
@@ -29,17 +29,19 @@ export default function Home() {
     setContextMenu({ show: true, x: pageX, y: pageY });
   };
 
-  // const requestFullscreen = () => {
-  //   const docElement = document.documentElement as HTMLElement & {
-  //     webkitRequestFullscreen?: () => Promise<void>;
-  //   };
+  const requestFullscreen = () => {
+    const docElement = document.documentElement as HTMLElement & {
+      webkitRequestFullscreen?: () => Promise<void>;
+    };
 
-  //   if (docElement.requestFullscreen) {
-  //     docElement.requestFullscreen();
-  //   } else if (docElement.webkitRequestFullscreen) {
-  //     docElement.webkitRequestFullscreen();
-  //   }
-  // };
+    if (docElement.requestFullscreen) {
+      docElement.requestFullscreen();
+    } else if (docElement.webkitRequestFullscreen) {
+      docElement.webkitRequestFullscreen();
+    }
+  };
+
+  const [fullscreenDialogOpen, setFullscreenDialogOpen] = useState(true);
 
   return (
     <div
@@ -65,7 +67,7 @@ export default function Home() {
                 width={23}
                 height={16}
                 alt=""
-                className="me-1"
+                className="me-2"
               />
               <span className="pt-[2.5px]">Wallpaper</span>
             </Button>
@@ -91,6 +93,19 @@ export default function Home() {
         </Window>
       </div>
       <Dock />
+      <AlertDialog
+        imgSrc="/app-icons/safari.svg"
+        isOpened={fullscreenDialogOpen}
+        title="Enable Fullscreen"
+        onClose={() => setFullscreenDialogOpen(false)}
+        acceptButtonAction={() => {
+          setFullscreenDialogOpen(false), requestFullscreen();
+        }}
+        cancelButtonText="No thanks"
+      >
+        This website is best viewed in fullscreen. Would you like to enable
+        fullscreen mode?
+      </AlertDialog>
     </div>
   );
 }
