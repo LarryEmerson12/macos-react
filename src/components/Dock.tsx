@@ -37,7 +37,7 @@ const APPS: App[] = [
   { name: "Photos", icon: "/app-icons/photos.svg" },
   { name: "Maps", icon: "/app-icons/maps.svg" },
   { name: "Mail", icon: "/app-icons/mail.svg" },
-  { name: "Podcast", icon: "/app-icons/podcast.svg" },
+  { name: "VS Code", icon: "/app-icons/vscode.svg" },
   { name: "Keynote", icon: "/app-icons/keynote.svg" },
   { name: "Terminal", icon: "/app-icons/terminal.svg" },
   { name: "Apple Music", icon: "/app-icons/apple-music.svg" },

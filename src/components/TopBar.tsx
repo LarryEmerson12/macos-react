@@ -14,13 +14,18 @@ const initialTopBarMenu = {
 
 export default function TopBar() {
   const [topBarMenu, setTopBarMenu] = useState(initialTopBarMenu);
-  const [selectedMenuIndex, setSelectedMenuIndex] = useState<number | null>(null);
+  const [selectedMenuIndex, setSelectedMenuIndex] = useState<number | null>(
+    null
+  );
 
   const menuRef = useRef<HTMLDivElement>(null);
 
   const topBarMenuClose = () => setTopBarMenu(initialTopBarMenu);
 
-  const handleTopBarMenu = (e: React.MouseEvent<HTMLElement>, index: number) => {
+  const handleTopBarMenu = (
+    e: React.MouseEvent<HTMLElement>,
+    index: number
+  ) => {
     const { pageX, pageY } = e;
     setSelectedMenuIndex(index);
     setTopBarMenu({ show: true, x: pageX - 25, y: pageY + 25 });
@@ -33,7 +38,12 @@ export default function TopBar() {
   return (
     <>
       <div className="select-none absolute flex w-full bg-white/35 h-7 backdrop-blur-lg top-0 p-1">
-        <span className="select-none font-bold text-black text-sm mx-2 h-4">Finder</span>
+        <button
+          className="select-none font-bold text-black text-sm mx-2 h-4"
+          onClick={(e) => handleTopBarMenu(e, 0)}
+        >
+          Finder
+        </button>
         {topMenuItems.map((item, index) => (
           <button
             key={item}

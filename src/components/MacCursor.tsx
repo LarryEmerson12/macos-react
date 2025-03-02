@@ -87,8 +87,8 @@ const MacCursor: React.FC<MacCursorProps> = ({ size }) => {
       className="pointer-coarse:hidden"
       style={{
         position: "fixed",
-        top: mousePosition.y - size / 2,
-        left: mousePosition.x - size / 2,
+        top: mousePosition.y - size / 5,
+        left: mousePosition.x - size / 5,
         pointerEvents: "none",
         zIndex: 9999,
       }}
