@@ -38,7 +38,9 @@ export default function Home() {
   };
 
   const [fullscreenDialogOpen, setFullscreenDialogOpen] = useState(true);
-  const [wallpaper, setWallpaper] = useState("/wallpapers/SequoiaDark.png");
+  const [wallpaper, setWallpaper] = useState(
+    "/wallpapers/BigSurGraphicLight.jpg"
+  );
 
   return (
     <div
