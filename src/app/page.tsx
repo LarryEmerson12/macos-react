@@ -7,6 +7,7 @@ import ContextMenu from "@/components/ContextMenu";
 import TopBar from "@/components/TopBar";
 import Window from "@/components/Window";
 import Notes from "@/components/Apps/Notes";
+import SystemPreferences from "@/components/Apps/SystemPreferences";
 
 const initialContextMenu = {
   show: false,
@@ -56,6 +57,11 @@ export default function Home() {
         />
       )}
       <TopBar />
+      <div className="absolute">
+        <Window title="System Preferences">
+          <SystemPreferences setWallpaper={setWallpaper} />
+        </Window>
+      </div>
       <div className="absolute">
         <Window title="Notes">
           <Notes />
