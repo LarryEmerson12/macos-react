@@ -74,7 +74,8 @@ export default function Home() {
         title="Enable Fullscreen"
         onClose={() => setFullscreenDialogOpen(false)}
         acceptButtonAction={() => {
-          setFullscreenDialogOpen(false), requestFullscreen();
+          setFullscreenDialogOpen(false);
+          requestFullscreen();
         }}
         cancelButtonText="No thanks"
       >
